@@ -4,51 +4,44 @@ import PropTypes from "prop-types";
 import apiFetch from "../tools/apiFetch";
 
 class DataProvider extends Component {
-    static propTypes = {
-        endpoint: PropTypes.string.isRequired
-    };
 
     state = {
         searchResults: null,
         errorMessage: "",
-        data: [],
-        loaded: false,
+        stockData: null,
+        stockDataLoaded: false,
         placeholder: "Loading..."
     }
 
-    handleStockSelection = (event) => {
-        apiFetch(event.target.value, "SYMBOL_SEARCH")
+    handleStockSearch = (event) => {
+        apiFetch("SYMBOL_SEARCH&keywords=", event.target.value)
         .then((data) => { this.setState({ searchResults: data }) })
         .catch((error) => { this.setState({ errorMessage: error }) })
     };
 
-    //turn this into a module?
-    fetchData = () => {
-        fetch(this.props.endpoint)
-        .then(response => {
-            if (response.status !== 200) {
-                return this.setState({ placeholder: "Something went wrong" });
-            }
-            return response.json();
-        })
-        .then(data => this.setState({ data: data, loaded: true }));
-    }
+    handleStockSelection = (event) => {
+        apiFetch("TIME_SERIES_DAILY&symbol=", event.target.id)
+        .then((data) => { this.setState({ stockData: data, stockDataLoaded: true }) })
+        .catch((error) => { this.setState({ errorMessage: error }) });
+    };
 
 
     render() {
-        const { searchResults, errorMessage, data, loaded, placeholder } = this.state;
+        const { searchResults, errorMessage, stockData, stockDataLoaded, placeholder } = this.state;
         
         // Assigns the search results to html elements
         let matches
         if (searchResults) {
             matches = searchResults.bestMatches.map(
                 (match) => 
-                    <option key={match["1. symbol"]} value={match["1. symbol"]}> {match["2. name"]} ({match["1. symbol"]}) </option> 
+                    <button id={match["1. symbol"]} onClick={this.handleStockSelection} > 
+                        {match["2. name"]} ({match["1. symbol"]}) 
+                    </button> 
             )
         }
 
         // Ternary operator checks if there are any errors, if yes then presents the message to the user, if no then renders the user interface
-        return errorMessage ? <p>{errorMessage}</p> : (
+        return stockDataLoaded ? this.props.render(stockData) : (
             <div>
                 <form>
                     <label>
@@ -56,13 +49,11 @@ class DataProvider extends Component {
                         <input 
                             type="text" 
                             placeholder="Microsoft" 
-                            onChange={this.handleStockSelection}
+                            onChange={this.handleStockSearch}
                         />
                     </label>
                 </form>
-                <p>
-                    {matches}
-                </p>
+                <p>{matches}</p>  
             </div>
         );
         
