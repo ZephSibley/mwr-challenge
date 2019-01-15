@@ -4,34 +4,36 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Responsi
 //turn the chart into a subcomponent
 
 
-const StockGraph = (stockData) => {
+const StockGraph = ({stockData}) => {
 
     StockGraph.PropTypes = {
         stockData: PropTypes.object.isRequired
     }
 
-    let graphData = []
+    let chartData = []
     console.log(stockData)
     let dates = Object.keys(stockData["Time Series (Daily)"]);
     for(let i=0; i<dates.length; i++) {
-        graphData.push(stockData["Time Series (Daily)"][dates[i]]);
+        chartData.push(stockData["Time Series (Daily)"][dates[i]]);
+        chartData[i].date = dates[i];
     }
 
+    console.log(chartData)
+
     return (
-        <ResponsiveContainer>
-            <LineChart  >
-                <XAxis />
-                <YAxis/>
-                <CartesianGrid strokeDasharray="3 3"/>
-                <Tooltip/>
-                <Legend />
-                <Line dataKey="close" connectNulls={true} type="monotone" stroke="#8884d8" />
-            </LineChart>
-        </ResponsiveContainer>
+        <LineChart width={1500} height={300} data={chartData}
+            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+            <XAxis dataKey="date"/>
+            <YAxis/>
+            <CartesianGrid strokeDasharray="3 3"/>
+            <Tooltip/>
+            <Legend />
+            <Line type="monotone" dataKey="4. close" stroke="#8884d8" activeDot={{r: 8}}/>
+      </LineChart>
     ); 
 };
 
 export default StockGraph;
 
-/*let graphData = [];
-    graphData.push(stockData["Time Series (Daily)"]) */
+/*let chartData = [];
+    chartData.push(stockData["Time Series (Daily)"]) */
