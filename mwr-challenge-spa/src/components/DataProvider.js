@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-
 import apiFetch from "../tools/apiFetch";
 
 class DataProvider extends Component {
@@ -34,7 +32,11 @@ class DataProvider extends Component {
         if (searchResults) {
             matches = searchResults.bestMatches.map(
                 (match) => 
-                    <button id={match["1. symbol"]} onClick={this.handleStockSelection} > 
+                    <button 
+                        id={match["1. symbol"]} 
+                        key={match["1. symbol"]}  // Unfortunately there are no entirely unique keys to use, but this is closest option.
+                        onClick={this.handleStockSelection} 
+                    > 
                         {match["2. name"]} ({match["1. symbol"]}) 
                     </button> 
             )
