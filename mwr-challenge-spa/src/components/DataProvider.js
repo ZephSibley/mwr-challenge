@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import apiFetch from "../tools/apiFetch";
+import normaliseStockData from "../tools/normaliseStockData";
 
 class DataProvider extends Component {
 
     state = {
         searchResults: null,
         errorMessage: "",
-        stockData: null,
-        stockDataLoaded: false,
-        placeholder: "Loading..."
+        chartData: null,
+        chartDataLoaded: false,
+        stockSelection: "",
     }
 
     handleStockSearch = (event) => {
@@ -18,14 +19,19 @@ class DataProvider extends Component {
     };
 
     handleStockSelection = (event) => {
+        this.setState({stockSelection: event.target.id})
         apiFetch("TIME_SERIES_DAILY&symbol=", event.target.id)
-        .then((data) => { this.setState({ stockData: data, stockDataLoaded: true }) })
-        .catch((error) => { this.setState({ errorMessage: error }) });
+        .then((data) => { 
+            let chartData = [];
+            normaliseStockData(data, chartData)
+            this.setState({ chartData: chartData, chartDataLoaded: true }) 
+        })
+        .catch((error) => { this.setState({ errorMessage: error }) });   
     };
 
 
     render() {
-        const { searchResults, errorMessage, stockData, stockDataLoaded, placeholder } = this.state;
+        const { searchResults, chartData, chartDataLoaded, stockSelection} = this.state;
         
         // Assigns the search results to html elements
         let matches
@@ -43,18 +49,16 @@ class DataProvider extends Component {
         }
 
         // Ternary operator checks if there are any errors, if yes then presents the message to the user, if no then renders the user interface
-        return stockDataLoaded ? this.props.render(stockData) : (
+        return chartDataLoaded ? this.props.render(chartData, stockSelection) : (
             <div>
-                <form>
-                    <label>
-                        Which stock would you like to view? 
-                        <input 
-                            type="text" 
-                            placeholder="Microsoft" 
-                            onChange={this.handleStockSearch}
-                        />
-                    </label>
-                </form>
+                <label>
+                    Which stock would you like to view? 
+                    <input 
+                        type="text" 
+                        placeholder="Microsoft" 
+                        onChange={this.handleStockSearch}
+                    />
+                </label>
                 <p>{matches}</p>  
             </div>
         );

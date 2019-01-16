@@ -7,8 +7,8 @@ class App extends Component {
   render() {
     return (
       <DataProvider 
-        render={(stockData) => (
-          <StockChart stockData={stockData} />
+        render={(chartData, stockSelection) => (
+          <StockChart chartData={chartData} stockSelection={stockSelection} />
         )}
       />
     );
