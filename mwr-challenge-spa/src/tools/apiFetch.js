@@ -16,7 +16,7 @@ function apiFetch (apiFunction, keywords) {
                     if (data.Note) { // The API responds with 200 instead of the appropriate response code for call limiting, so as a workaround this detects the response note
                         reject("Sorry, we've hit the API call limit, please refresh and try again in a minute")
                     } else if (data["Error Message"]) { // Again, the API still responds with 200 even if you make an invalid call
-                        console.log(data)// Pass    Currently the program submits a blank value when you delete what's already there, which results in the error message, might look for a more sensible approach to handle this
+                        reject("Please enter a valid name or stock symbol")
                     } else {
                         resolve(data);
                     }

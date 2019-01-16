@@ -51,7 +51,7 @@ class DataProvider extends Component {
             )
         }
 
-        // If selection is made and chart data is loaded, will render StockChart as a renderprop (passing in the data)
+        // Once a selection is made and chart data is loaded, will render StockChart as a renderprop (passing in the data)
         return chartDataLoaded ? this.props.render(chartData, stockSelection) : (
             <div className="search-container" >
                 <p>Which stock would you like to view? </p>

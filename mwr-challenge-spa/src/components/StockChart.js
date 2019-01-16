@@ -60,10 +60,3 @@ class StockChart extends Component {
 };
 
 export default StockChart;
-
-/*let chartData = [];
-    chartData.push(stockData["Time Series (Daily)"]) */
-
-    //name={stockData["Meta Data"]["2. Symbol"]} 
-
-    //timeFrameSpecified ? <p>hello</p> : 
