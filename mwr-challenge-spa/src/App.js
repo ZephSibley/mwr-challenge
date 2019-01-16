@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import DataProvider from './components/DataProvider';
-import StockGraph from './components/StockGraph';
+import StockChart from './components/StockChart';
 
 class App extends Component {
   render() {
     return (
       <DataProvider 
         render={(stockData) => (
-          <StockGraph stockData={stockData} />
+          <StockChart stockData={stockData} />
         )}
       />
     );
