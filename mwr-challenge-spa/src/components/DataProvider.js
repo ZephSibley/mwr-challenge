@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import apiFetch from "../tools/apiFetch";
+import debounce from "../tools/debounce";
 import normaliseStockData from "../tools/normaliseStockData";
 
 class DataProvider extends Component {
@@ -13,9 +14,11 @@ class DataProvider extends Component {
     }
 
     handleStockSearch = (event) => {
+        debounce(  //On a timer to prevent overcalling the API
         apiFetch("SYMBOL_SEARCH&keywords=", event.target.value)
         .then((data) => { this.setState({ searchResults: data }) })
         .catch((error) => { this.setState({ errorMessage: error }) })
+        , 15000);
     };
 
     handleStockSelection = (event) => {
@@ -64,9 +67,6 @@ class DataProvider extends Component {
                 </div>
             </div>
         );
-        
-        // If the get request was successful it returns the data to the render props, otherwise returns the placeholder (loading, or if error "something went wrong")
-        //return loaded ? this.props.render(data) : <p>{placeholder}</p>;
     }
 
 }
