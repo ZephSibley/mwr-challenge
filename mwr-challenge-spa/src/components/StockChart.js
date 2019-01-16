@@ -31,8 +31,8 @@ class StockChart extends Component {
         var {chartData, stockSelection} = this.props;
 
         return (
-            <div>
-                <ResponsiveContainer width="90%" height={500} >
+            <div className="stock-chart-container" >
+                <ResponsiveContainer width="80%" height={600} >
                     <LineChart data={timeFrameSpecified ? newTimeFrame : chartData} > 
                         <XAxis dataKey="date"/>
                         <YAxis/>

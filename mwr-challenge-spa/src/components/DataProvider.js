@@ -15,9 +15,9 @@ class DataProvider extends Component {
 
     handleStockSearch = (event) => {
         debounce(  //On a timer to prevent overcalling the API
-        apiFetch("SYMBOL_SEARCH&keywords=", event.target.value)
-        .then((data) => { this.setState({ searchResults: data }) })
-        .catch((error) => { this.setState({ errorMessage: error }) })
+            apiFetch("SYMBOL_SEARCH&keywords=", event.target.value)
+            .then((data) => { this.setState({ searchResults: data }) })
+            .catch((error) => { this.setState({ errorMessage: error }) })
         , 15000);
     };
 
@@ -51,20 +51,16 @@ class DataProvider extends Component {
             )
         }
 
-        // Ternary operator checks if there are any errors, if yes then presents the message to the user, if no then renders the user interface
+        // If selection is made and chart data is loaded, will render StockChart as a renderprop (passing in the data)
         return chartDataLoaded ? this.props.render(chartData, stockSelection) : (
-            <div>
-                <label>
-                    Which stock would you like to view? 
-                    <input 
-                        type="text" 
-                        placeholder="Microsoft" 
-                        onChange={this.handleStockSearch}
-                    />
-                </label>
-                <div>
-                    {errorMessage ? <p>{errorMessage}</p> : matches}
-                </div>
+            <div className="search-container" >
+                <p>Which stock would you like to view? </p>
+                <input 
+                    type="text" 
+                    placeholder="Microsoft" 
+                    onChange={this.handleStockSearch}
+                />
+                {errorMessage ? <p>{errorMessage}</p> : matches}
             </div>
         );
     }
