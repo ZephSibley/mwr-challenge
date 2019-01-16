@@ -10,27 +10,30 @@ class StockChart extends Component {
         stockSelection: PropTypes.string.isRequired
     }
 
-    /*state = {
-        chartData: []
-    }*/
+    state = {
+        timeFrameSpecified: false,
+        newTimeFrame: []
+    }
+
+    viewSelection = (event) => {
+        if (!event.target.value) {
+            this.setState({timeFrameSpecified:false});
+        } else {
+            let timeSelection = this.props.chartData.slice(event.target.value) 
+            console.log(timeSelection)
+            this.setState({ timeFrameSpecified: true, newTimeFrame: timeSelection })
+        }
+        // The timeframes are in market working days, rather than strictly chronological.
+    }
 
     render() {
+        var {timeFrameSpecified, newTimeFrame} = this.state;
         var {chartData, stockSelection} = this.props;
-        /*
-        let chartData = []
-        normaliseStockData(stockData, chartData);
-        */
-        function viewSelection(event) {
-            chartData = chartData.slice(event.target.value)
-            console.log(chartData)
-            return chartData
-        }
-        console.log(chartData)
 
         return (
             <div>
                 <ResponsiveContainer width="90%" height={500} >
-                    <LineChart data={chartData} >
+                    <LineChart data={timeFrameSpecified ? newTimeFrame : chartData} > 
                         <XAxis dataKey="date"/>
                         <YAxis/>
                         <CartesianGrid strokeDasharray="3 3"/>
@@ -45,10 +48,14 @@ class StockChart extends Component {
                         />
                     </LineChart>
                 </ResponsiveContainer>
-                <button value="" onClick={viewSelection}>100 Day View</button>
-                <button value="-30" onClick={viewSelection} >30 Day View</button>
+                <div>
+                    <button value="" onClick={this.viewSelection}>Full View</button>
+                    <button value="-30" onClick={this.viewSelection}>30 Day View</button>
+                    <button value="-10" onClick={this.viewSelection}>10 Day View</button>
+                </div>
             </div>
-        )
+        ) 
+        
     };
 };
 
@@ -58,3 +65,5 @@ export default StockChart;
     chartData.push(stockData["Time Series (Daily)"]) */
 
     //name={stockData["Meta Data"]["2. Symbol"]} 
+
+    //timeFrameSpecified ? <p>hello</p> : 
