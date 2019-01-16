@@ -31,7 +31,7 @@ class DataProvider extends Component {
 
 
     render() {
-        const { searchResults, chartData, chartDataLoaded, stockSelection} = this.state;
+        const { searchResults, chartData, chartDataLoaded, stockSelection, errorMessage} = this.state;
         
         // Assigns the search results to html elements
         let matches
@@ -59,7 +59,9 @@ class DataProvider extends Component {
                         onChange={this.handleStockSearch}
                     />
                 </label>
-                <p>{matches}</p>  
+                <div>
+                    {errorMessage ? <p>{errorMessage}</p> : matches}
+                </div>
             </div>
         );
         
