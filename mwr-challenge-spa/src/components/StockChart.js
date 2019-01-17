@@ -15,16 +15,20 @@ class StockChart extends Component {
         newTimeFrame: []
     }
 
+    restart = () => {
+        window.location.reload();
+    };
+
     viewSelection = (event) => {
         if (!event.target.value) {
             this.setState({timeFrameSpecified:false});
         } else {
             let timeSelection = this.props.chartData.slice(event.target.value) 
-            console.log(timeSelection)
             this.setState({ timeFrameSpecified: true, newTimeFrame: timeSelection })
-        }
-        // The timeframes are in market working days, rather than strictly chronological.
+        } // The timeframes are in market working days, rather than being strictly chronological.    
     }
+
+    
 
     render() {
         var {timeFrameSpecified, newTimeFrame} = this.state;
@@ -52,6 +56,9 @@ class StockChart extends Component {
                     <button value="" onClick={this.viewSelection}>Full View</button>
                     <button value="-30" onClick={this.viewSelection}>30 Day View</button>
                     <button value="-10" onClick={this.viewSelection}>10 Day View</button>
+                </div>
+                <div>
+                    <button onClick={this.restart}>Start Again</button> 
                 </div>
             </div>
         ) 
