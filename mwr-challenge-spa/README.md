@@ -43,8 +43,9 @@ In the project directory, you can run:
 ### `npm start`
 
 Replaced default "react-scripts start" with "node server.js" <br>
+node server.js runs the app's backend, local port 8080, "/test" route for ping test returns "Confirmed", "/" serves the app itself. <br>
 react-scripts start runs the app in development mode at port 3000, reloads on save, logs lint errors to the console <br>
-node server.js runs the app's backend, local port 8080, "/test" route for ping test returns "Confirmed", "/" serves the app itself.
+DEV MODE WILL NOT RUN unless you provide your own alphavantage API key. Either define in a .env file as "REACT_APP_API_KEY" or use it to replace "process.env.REACT_APP_API_KEY" on line 7 of the apiFetch tool. 
 
 ### `npm run build`
 
@@ -73,3 +74,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 * [Create-React-App](https://github.com/facebook/create-react-app) - The Toolchain
 * [Recharts](http://recharts.org/) - To provide the stock chart
 * [Express](https://expressjs.com/) - The backend framework used
+* [AlphaVantage](https://www.alphavantage.co/) - The API that provides all the stock data
