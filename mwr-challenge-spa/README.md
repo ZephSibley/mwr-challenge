@@ -1,3 +1,5 @@
+# MWR Challenge SPA
+
 
 I approached this challenge with the same mindset that I would approach a commercial project with the same requirements. 
 
@@ -5,6 +7,7 @@ I gather a software developer needs to find a middle ground between reinventing 
 I believe I have succeeded in using frameworks and libraries only where it best benefits the application and/or build process, and in writing my own code where it is pragmatic to do so.
 The debouncer tool represents a further middleground; I avoid calling in an entire library for the sake of a single function, rather simply include the function on it's own. 
 
+As it stands, the project was completed in 22 hours. Given more time I would implement a feature which would allow users to add indicators to the chart, such as a ten day moving average line. 
 
 ## The Framework:
 I decided to use React as the intended level of DOM manipulation would be comparitively unwieldy to pull off with a more low-level setup, such as Jquery with Handlebars. <br>
@@ -21,12 +24,13 @@ In the past, for example, I have wasted time debugging a build only to find out 
 I needed to use a library for the stock chart so I brought in Recharts. <br>
 This library is built to synergise with React, and has better documentation than the alternative; Victoryjs. 
 
-### Basic Security Features
-I have included Helmetjs to provide some basic security features.<br>
+### Additional Basic Security Features
+Helmetjs to provides some basic security features to augment the use of the backend framework Expressjs.<br>
 X Frame Options has been set to deny, so that the webpage cannot be put into an iframe, helping prevent clickjacking attacks. Can be set to "allow" or "sameorigin". <br>
 The Strict-Transport-Security header has been set to keep users on HTTPS, will not force users to switch to HTTPS. Forcing HTTPS prevents the server running locally. Will pursue if I set up my own url/SSL <br>
-The app will also not sniff MIME types in order to prevent an attack whereby content types are faked in order to trick the browser into executing a malicious script
+The app will also not sniff MIME types in order to prevent an attack whereby content types are faked in order to trick the browser into executing a malicious script <br>
 For a full list of the default features, see https://github.com/helmetjs/helmet
+
 
 <br>
 <br>
@@ -40,7 +44,7 @@ In the project directory, you can run:
 
 Replaced default "react-scripts start" with "node server.js" <br>
 react-scripts start runs the app in development mode at port 3000, reloads on save, logs lint errors to the console <br>
-node server.js runs the app's backend, local port 8080, "/test" route for ping test returns "Confirmed"
+node server.js runs the app's backend, local port 8080, "/test" route for ping test returns "Confirmed", "/" serves the app itself.
 
 ### `npm run build`
 
@@ -62,3 +66,10 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+
+## Built With
+
+* [React](https://reactjs.org/) - The web framework used
+* [Create-React-App](https://github.com/facebook/create-react-app) - The Toolchain
+* [Recharts](http://recharts.org/) - To provide the stock chart
+* [Express](https://expressjs.com/) - The backend framework used
