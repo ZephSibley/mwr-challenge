@@ -1,24 +1,24 @@
 
 I approached this challenge with the same mindset that I would approach a commercial project with the same requirements. 
 
-I gather a software developer needs to find a middle ground between reinventing the wheel and adding unnecessary bulk to the application.
+I gather a software developer needs to find a middle ground between reinventing the wheel and adding unnecessary bulk to the application. <br>
 I believe I have succeeded in using frameworks and libraries only where it best benefits the application and/or build process, and in writing my own code where it is pragmatic to do so.
 The debouncer tool represents a further middleground; I avoid calling in an entire library for the sake of a single function, rather simply include the function on it's own. 
 
 
-##The Framework:
-I decided to use React as the intended level of DOM manipulation would be comparitively unwieldy to pull off with a more low-level setup, such as Jquery with Handlebars.
+## The Framework:
+I decided to use React as the intended level of DOM manipulation would be comparitively unwieldy to pull off with a more low-level setup, such as Jquery with Handlebars. <br>
 With React I can avoid having to manually traverse the DOM tree, and instead simply declare how the component should look. This greatly improves readablility and maintainability.
-Another significant benefit is that using React opens up the possibility of bringing in powerful tools from the React ecosystem, such as Recharts.
+Another significant benefit is that using React opens up the possibility of bringing in powerful tools from the React ecosystem, such as Recharts.<br>
 The Virtual DOM offers performance benefits, by only changing nodes that need to be changed, but those benefits are marginal in an app of this size.
 
-##The React toolchain:
-This toolchain provides a convenient develoment environment, automating both the compiling and build processes and providing a great deal of boilerplate
+## The React toolchain:
+This toolchain provides a convenient develoment environment, automating both the compiling and build processes and providing a great deal of boilerplate<br>
 I have manually handled a webpack/babel toolchain for React before, but it adds a layer of complexity to the build process with no discernable benefit here. 
 In the past, for example, I have wasted time debugging a build only to find out that babel needed me to manually add support for the spread operator. 
 
-###The chart library:
-I needed to use a library for the stock chart so I brought in Recharts. 
+### The chart library:
+I needed to use a library for the stock chart so I brought in Recharts. <br>
 This library is built to synergise with React, and has better documentation than the alternative; Victoryjs. 
 
 
