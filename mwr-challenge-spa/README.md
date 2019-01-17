@@ -13,7 +13,7 @@ Another significant benefit is that using React opens up the possibility of brin
 The Virtual DOM offers performance benefits, by only changing nodes that need to be changed, but those benefits are marginal in an app of this size.
 
 ## The React toolchain:
-This toolchain provides a convenient develoment environment, automating both the compiling and build processes and providing a great deal of boilerplate<br>
+The create-react-app toolchain provides a convenient develoment environment, automating both the compiling and build processes and providing a great deal of boilerplate<br>
 I have manually handled a webpack/babel toolchain for React before, but it adds a layer of complexity to the build process with no discernable benefit here. 
 In the past, for example, I have wasted time debugging a build only to find out that babel needed me to manually add support for the spread operator. 
 
@@ -21,8 +21,15 @@ In the past, for example, I have wasted time debugging a build only to find out 
 I needed to use a library for the stock chart so I brought in Recharts. <br>
 This library is built to synergise with React, and has better documentation than the alternative; Victoryjs. 
 
+### Basic Security Features
+I have included Helmetjs to provide some basic security features.<br>
+X Frame Options has been set to deny, so that the webpage cannot be put into an iframe, helping prevent clickjacking attacks. Can be set to "allow" or "sameorigin". <br>
+The Strict-Transport-Security header has been set to keep users on HTTPS, will not force users to switch to HTTPS. Forcing HTTPS prevents the server running locally. Will pursue if I set up my own url/SSL <br>
+The app will also not sniff MIME types in order to prevent an attack whereby content types are faked in order to trick the browser into executing a malicious script
+For a full list of the default features, see https://github.com/helmetjs/helmet
 
-
+<br>
+<br>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
